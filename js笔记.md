@@ -1765,3 +1765,122 @@ ev.target :
 
 
 # BOM
+
+BOM是浏览器对象模型BOM是browser object model的缩写，简称浏览器对象模型。BOM提供了独立于内容而与浏览器窗口进行交互的对象
+由于BOM主要用于管理窗口与窗口之间的通讯，因此其核心对象是window。BOM由一系列相关的对象构成，并且每个对象都提供了很多方法与属性。BOM缺乏标准，JavaScript语法的标准化组织是ECMA，DOM的标准化组织是W3C。BOM最初是Netscape浏览器标准的一部分。
+
+
+
+window.screenTop   //窗口顶部距屏幕顶部的距离
+window.screenLeft  //窗口左侧距屏幕左侧的距离
+window.innerWidth  //窗口中可视区域(viewpoint)的宽
+window.innerHeight  //窗口中可视区域(viewpoint)的高度 该值与浏览器是否显示菜单栏等因素有关
+window.outerWidth  //浏览器窗口本身的宽度(可视区域宽度+浏览器边框宽度)
+window.outerHeight  //浏览器窗口本身的高度
+注意：
+chrome在最大化时浏览器窗口没有边框宽度,非最大化时有8px边框
+ff和ie上下左右有8px的边框宽度
+
+
+
+## BOM结构示意图
+
+BOM学习中我们将学到与浏览器窗口交互的一些对象，例如可以移动，调整浏览器大小的window对象，可以用于导航的location 对象与history对象，可以获取浏览器，操作系统与用户屏幕信息的navigator与screen对象，可以使用document作为访问HTML文档的入口，管理框架的frames对象等。
+
+![](C:\Users\15953\Desktop\图片1.png)
+
+
+
+## DOM和BOM的区别
+
+DOM通过脚本动态地访问和更新文档的内容、结构以及样式的接口。BOM通过脚本操作浏览器的各个功能组件的接口。
+
+ 区别：DOM描述了处理网页内容的接口，BOM描述了与浏览器进行交互的接口。document是DOM的核心对象，window则是BOM的核心对象。
+
+
+
+## window对象是什么
+
+浏览器打开一个文档，就创建了一个 window 对象，即 window 对象表示浏览器中打开的窗口。
+
+window 对象是全局对象，可以把窗口的属性作为全局变量来使用。例如，可以只写 document，而不必写 window.document。同样，可以把当前窗口对象的方法当作函数来使用，如只写 alert()，而不必写 Window.alert()。
+
+如果文档包含框架（frame），浏览器会为文档创建一个 window 对象，并为每个框架创建一个额外的 window 对象。
+
+在window对象属性和方法中，某些属性和方法存在浏览器兼容性的问题，而有些属性则已经被浏览器弃用。所以我们这里主要着重讲解：location、navigator、screen和history。
+
+
+
+### window.open(); 
+
+打开一个新窗口http://www.cnblogs.com/li0803/archive/2008/11/03/1324746.html（HTTP协议详解）有两种方式打开：
+
+ 1：直接调用IE支持ff/chrome有拦截
+
+ 2:*人为主动触发*的事件调用：所有浏览器都支持
+
+ 		参数（4个参数，最后一个参数没用，相当于3个参数）：
+
+ 1.url:如果路径为线上地址，要遵循HTTP协议 
+
+ 2.打开的方式:默认值为，_blank当前页面打开：_self
+
+​		如果在iframe中打开，那么在window.open的第二个参数中填写name值
+
+ 3.设置窗口大小width,height,IE下设置是否可以缩放，yes可以缩放，no不可以缩放
+
+ 		注意：如果要设置第三个参数，那么第二个必须为_blank
+
+ 		返回值为，新打开窗口的window
+
+
+
+### window.close();
+
+ 关闭当前窗口
+
+ 如果直接调用：chrome中直接关闭当前窗口
+
+​							ff没反应
+
+​							IE，有个温馨提示
+
+​							人为主动触发事件也和直接调用一样；所有浏览器都能兼容的方法是：通过window.open去打开，然后就可以关闭打开的窗口。  
+
+
+
+### window.navigator.userAgent;
+
+用户代理信息,操作系统 、 浏览器内核 、浏览器版本等
+
+window.location:  获取地址栏信息是个对象
+
+​								字符串版的地址信息：window.location.href;
+
+​								地址栏查询信息：window.location.search (问号到井号之间的信息)
+
+​								既可以读也可以写,如果为写操作，那么是会刷新页面的(除非有设置锚信息)。没有用人为事件触发，那么设置的时候会一直刷新。
+
+​								锚信息：window.location.hash (井号之后的内容) 既可以读也可以写
+
+
+
+### 获取可视区的高宽
+
+window.innerWidth:获取可视区的宽度（包含滚动条宽度） 
+
+window.innerHeight
+
+
+
+pageYOffset:只能读取不能设置滚动条的高度
+
+pageXOffset只能读取不能设置滚动条的宽度
+
+window.scrollTo(x,y) 设置滚条的距离
+
+clientHeight:如果没有设置样式高度，那么结果就为内容撑出来的高度
+
+document.body.scrollHeight ：被内容称出来的高度（但是不是太精确，会有点点误差，可以通过统一文字的样式，这样就能精确获取）。
+
+document.body.offsetHeight:如果没有设置高度，跟内容撑开的值来走，如果设置了就走设置的高度。

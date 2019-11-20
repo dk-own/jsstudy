@@ -1787,7 +1787,9 @@ ff和ie上下左右有8px的边框宽度
 
 BOM学习中我们将学到与浏览器窗口交互的一些对象，例如可以移动，调整浏览器大小的window对象，可以用于导航的location 对象与history对象，可以获取浏览器，操作系统与用户屏幕信息的navigator与screen对象，可以使用document作为访问HTML文档的入口，管理框架的frames对象等。
 
-![](C:\Users\15953\Desktop\图片1.png)
+![image-20191120204511065](C:\Users\15953\AppData\Roaming\Typora\typora-user-images\image-20191120204511065.png)
+
+
 
 
 
@@ -1884,3 +1886,247 @@ clientHeight:如果没有设置样式高度，那么结果就为内容撑出来�
 document.body.scrollHeight ：被内容称出来的高度（但是不是太精确，会有点点误差，可以通过统一文字的样式，这样就能精确获取）。
 
 document.body.offsetHeight:如果没有设置高度，跟内容撑开的值来走，如果设置了就走设置的高度。
+
+
+
+可视区的宽高：document.documentElement.clientWidth
+
+可视区的高度：document.documentElement.clientHeight
+
+左右两边居中：left:(可视区的宽度 - 当前元素的宽度)/2
+
+ top:(可视区的高度 - 当前元素的高度)/2
+
+ 
+
+onscroll:当滚动滚动条的时候，触发的事件
+
+onresize:当页面缩放的时候，触发的事件
+
+
+
+## 什么是History 对象？
+
+JavaScript History 对象用于记录操作浏览器的访问历史。History 对象是 window 对象的一部分，可通过 window.history 属性对其进行访问。
+
+提示：History 对象的有效作用范围都是指当前窗口。
+
+
+
+History 对象有唯一的一个 length 属性，用于得到浏览器访问历史记录中的 URL 数量。
+
+
+
+### History 对象有如下 3 个方法：
+
+\1. history.back()：返回前一个浏览页面（如果存在）
+
+\2. history.forward()：前往下一个浏览页面（如果存在）
+
+\3. history.go(2/-1)：前往 history 列表中的某个指定页面（如果存在）
+
+
+
+
+
+## Location是什么？
+
+JavaScript Location 对象用于获取或设置当前的 URL 信息。Location 对象是 window 对象的一部分，可通过 window.location 属性对其进行访问。
+
+Location 对象常用于得到 URL 地址中的信息，或者刷新当前页面，页面重定向等，具体可见下面列出的各属性和方法。
+
+![image-20191120195452561](C:\Users\15953\AppData\Roaming\Typora\typora-user-images\image-20191120195452561.png)
+
+<script type="text/javascript">
+		console.log(window.location.hash);//  #1
+		console.log(window.location.host);//  127.0.0.1:8001
+		console.log(window.location.hostname);//  127.0.0.1
+		console.log(window.location.href);//  http://127.0.0.1:8001/2.08/01.location.html?__hbt=1532484540442#1
+		console.log(window.location.pathname);//  /2.08/01.location.html
+		console.log(window.location.port);//  8001
+		console.log(window.location.protocol);//  http:
+		console.log(window.location.search);//   ?__hbt=1532484395449
+	</script>
+
+
+
+### Location 对象方法
+
+Location对象有如下 3 个方法：
+
+location.assign()：加载新页面文档
+
+location.reload()：重新加载（刷新）当前页面
+
+location.replace()：用新的文档替代当前文档
+
+
+
+说明：实际上 location.assign() 方法的效果与 location.href 是一样的。
+
+
+
+#### location.reload()
+
+Location 对象的 reload() 方法用于重新加载当前文档（页面），语法如下：
+
+location.reload( false|true )
+
+如果该方法参数为 false 或者省略参数，它就会用 HTTP 头 If-Modified-Since 来检测服务器上的文档是否已改变。如果文档已改变，location.reload() 会再次下载该文档。如果文档未改变，则该方法将从缓存中装载文档。
+
+如果要强制刷新当前页面，请将参数设置为 true。
+
+
+
+#### location.replace()
+
+Location 对象的 replace() 方法用于重新加载当前文档（页面），语法如下：
+
+location.replace( new_URL )
+
+
+
+#### replace() 与 reload() 的区别
+
+location.reload() 方法用于刷新当前页面，如果有 POST 数据提交，则会重新提交数据；location. replace() 则将新的页面以替换当前页面，它是从服务器端重新获取新的页面，不会读取客户端缓存且新的 URL 将覆盖 History 对象中的当前纪录（不可通过后退按钮返回原先的页面）。
+
+如果想要刷新当前的页面，又避免 POST 数据提交，可以使用：
+
+window.location.replace( location.href );
+
+
+
+## Navigator 对象是什么？
+
+JavaScript Navigator 对象包含了有关浏览器的相关信息。
+
+提示：Navigator 对象虽然没有明确的相关标准，但所有浏览器都支持该对象。
+
+![image-20191120200922460](C:\Users\15953\AppData\Roaming\Typora\typora-user-images\image-20191120200922460.png)
+
+注意说明
+
+\1. navigator.appCodeName：IE/Firefox/Chrome 系列浏览器中，它的值都是 "Mozilla"。
+
+\2. navigator.appName：Firefox/Chrome 均为 Netscape。
+
+\3. navigator.browserLanguage：Firefox/Chrome 返回 "undefined"。
+
+\4. navigator.cpuClass：Firefox/Chrome 返回 "undefined"。
+
+\5. navigator.onLine：Firefox/Chrome 返回 "undefined"。
+
+\6. navigator.systemLanguage：Firefox/Chrome 返回 "undefined"。
+
+\7. navigator.userLanguagee：Firefox/Chrome 返回 "undefined"。
+
+利用 Navigator 对象提供的浏览器信息，可以方便的得到访问用户的浏览器名称及版本。
+
+
+
+### 定位事件
+
+HTML5 Geolocation API 用于获得用户的地理位置。 Internet Explorer 9、Firefox、Chrome、Safari 以及 Opera 支持地理定位。对于拥有 GPS 的设备，比如 iPhone，地理定位更加精确。该对象主要有三个方法：getCurrentPosition()，watchPosition()，clearWatch()。但是我们要判断浏览器的支持情况。
+
+<script type="text/javascript">
+
+ if (navigator.geolocation){ // 支持
+
+   
+
+ }else{ // 不支持
+
+   console.log("您的浏览器不支持定位")
+
+ }
+
+ </script>
+
+
+
+#### getCurrentPosition方法
+
+getCurrentPosition()方法 可以传递三个参数。调用这个方法就会触发请求用户共享地理定位信息的对话框 。这个方法接收三个具体的参数分别是成功的回调函数，失败回调函数，以及配置选项。
+
+![image-20191120201405428](C:\Users\15953\AppData\Roaming\Typora\typora-user-images\image-20191120201405428.png)
+
+position对象有两个属性：coords 和 timestamp 。 coords 对象中将包含下列与位置相关的信息。
+
+latitude：以十进制度数表示的纬度
+
+longitude：以十进制度数表示的经度
+
+accuracy：经纬度坐标的精度，以米为单位
+
+有些浏览器可能会在 coords 对象中提供如下属性。
+
+altitude：以米为单位的海拔高度，如果没有相关数据则值为 null
+
+altitudeAccuracy：海拔高度的精度，以米为单位，数值越大越不精确
+
+heading：指南针的方向，0°表示正北，值为 NaN 表示没有检测到数据
+
+speed：速度，即每秒移动多少米，如果没有相关数据则值为 null
+
+msg包含两个属性：message 和 code。其中，message 属性是提示文本消息，解释为什么会出错，而 code 属性中保存着一个数值，表示错误的类型：用户拒绝共享（1），位置无效（2）或者超时（3）
+
+
+
+<script type="text/javascript">
+		if (navigator.geolocation){  // 支持
+		    navigator.geolocation.getCurrentPosition(success, error);
+		    // 成功的回调函数
+		    function success(position) {
+		        // 获取经纬度信息
+		      	console.log(position.coords.latitude, position.coords.longitude);
+		    }
+			// 失败的回调函数
+		    function error(msg) {
+		        // 输出失败的信息
+		       console.log(msg.code, msg.message);
+		    }
+		}else{  // 不支持
+		    console.log("您的浏览器不支持定位")
+		}
+	</script>
+注意：因为我们的这个API默认访问的使用谷歌地图，所以很有可能会出现错误，因为国内访问谷歌地图服务器有限制。
+
+
+
+#### watchPosition()
+
+如果要跟踪用户的位置，那么可以使用 watchPosition() 方法。这个方法的使用和 getCurrentPosition() 完全相同。实际上 watchPosition() 与定时调用 getCurrentPosition() 能得到相同效果。在第一次调用 watchPosition() 方法后，会取得当前位置，执行成功回调或者错误回调。然后，watchPosition() 就地等待系统发出位置已改变的信号。
+
+ 调用 watchPosition() 会返回一个数值标识符，用于跟踪监控的操作。基于这个返回值可以取消监控操作，只要将其传递给 clearWatch() 方法即可（与使用 setTimeout() 和 clearTimeout() 类似），例如：
+
+var watchId = navigator.geolocation.watchPosition(success, error);
+
+clearWatch(watchId);
+
+
+
+#### clearWatch()
+
+清除一个跟踪控制监听。需要传入使用watchPosition函数返回的值。
+
+
+
+#### 为什么使用百度地图
+
+我们的百度地图和高度地图是目前国内主要的地图工具提供商。官方都提供了非常相信的信息内容。具体可以参考官方文档进行学习。
+
+ <!--// 注意要引入百度key-->
+
+```html
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=???"></script>
+<script>
+var geolocation = new BMap.Geolocation();
+geolocation.getCurrentPosition(function(r){
+	if(this.getStatus() == BMAP_STATUS_SUCCESS){
+		alert('您的位置：'+r.point.lng+','+r.point.lat);
+	}else {
+		alert('failed'+this.getStatus());
+	} 
+});
+</script>
+```

@@ -2130,3 +2130,46 @@ geolocation.getCurrentPosition(function(r){
 });
 </script>
 ```
+
+
+
+## 本地存储
+
+### 什么是 HTML 本地存储？
+
+通过本地存储（Local Storage），web 应用程序能够在用户浏览器中对数据进行本地的存储。
+
+在 HTML5 之前，应用程序数据只能存储在 cookie 中，包括每个服务器请求。本地存储则更安全，并且可在不影响网站性能的前提下将大量数据存储于本地。
+
+与 cookie 不同，存储限制要大得多（至少5MB），并且信息不会被传输到服务器。
+
+本地存储经由起源地（origin）（经由域和协议）。所有页面，从起源地，能够存储和访问相同的数据。
+
+
+
+### Cookies
+
+储存的时间默认为session时间
+
+设置cookies：document.cookie = 'name = 111';
+
+获取存储的数据：document.cookie
+
+修改已经存储的数据：给已经存在的name重新赋值
+
+修改存储的时间：document.cookie = 'user1=112222;expires=时间';
+
+如何删除时间：让储存的数据时间过期
+
+
+
+###  本地存储（Local Storage） 
+
+获取本地存储的数据：window.localStorage.getItem();
+
+设置：window.localStorage.setItem();
+
+清除某条数据：window.localStorage.removeItem();
+
+清除所有数据：window.localStorage.clear();
+

@@ -2173,3 +2173,173 @@ geolocation.getCurrentPosition(function(r){
 
 清除所有数据：window.localStorage.clear();
 
+
+
+## 什么是正则表达式
+
+正则表达式(regular expression)是一个描述字符模式的对象。ECMAScript的RegExp类表示正则表达式，而String和RegExp都定义了使用正则表达式进行强大的模式匹配和文本检索与替换的函数。
+
+正则表达式的作用
+
+正则表达式主要用来验证客户端的输入数据。用户填写完表单单击按钮之后，表单就会被发送到服务器，在服务器端通常会用JAVA、PHP、ASP.NET等服务器脚本对其进行进一步处理。因为客户端验证，可以节约大量的服务器端的系统资源，并且提供更好的用户体验。
+
+
+
+### 如何创建正则表达式
+
+建正则表达式和创建字符串类似，创建正则表达式提供了两种方法，一种是采用new运算符，另一个是采用字面量方式。
+
+
+
+new运算符创建正则表达式
+
+它接收两个参数：一个是要匹配的字符串模式，另一个是可选的标志字符串。
+
+实例（ 21.RegExp1.html ）：
+
+<script type="text/javascript">
+
+var pattern = new RegExp("[bc]at","i");
+
+//匹配第一个bat或者cat,不区分大小写
+
+</script>
+
+
+
+采用字面量方式创建正则表达式
+
+与new运算符方式类似，它也可以看作是接收两个参数：一个是要匹配的字符串模式，另一个是可选的标志字符串。
+
+实例（ 22.RegExp2.html ）：
+
+<script type="text/javascript">
+
+var pattern = /[bc]at/i;
+
+//匹配第一个bat或者cat,不区分大小写
+
+</script>
+
+
+
+### 常用的正则表达式方法
+
+正则表达式有很多方法，在这里只选几个比较常用的来讲解：
+
+exec()方法
+
+test()方法
+
+search()方法
+
+match()方法
+
+replace()方法
+
+
+
+exec()方法：
+
+该方法是专门为捕获组而设计的，其接受一个参数，即要应用模式的字符串，然后返回包含第一个匹配项信息的数组；或者在没有匹配项的情况下返回null。返回的数组虽然是Array的实例，但是包含两个额外的属性：index和input。其中index表示匹配项在字符串中的位置，而input表示应用字符串表达式的字符串。
+
+实例（ 23.exec.html ）：
+
+<script type="text/javascript">
+var text = "mom and dad and baby";
+var pattern = /mom( and dad( and baby)?)?/gi;
+var matches = pattern.exec(text);
+console.log(matches.index); //0
+console.log(matches.input); //mom and dad and baby
+console.log(matches[0]);    //mom and dad and baby
+console.log(matches[1]);    //and dad and baby
+console.log(matches[2]);    //and baby
+</script>
+
+
+
+test()方法：
+正则表达式常用方法test()，它接受一个字符串参数。在模式与该参数匹配的情况下返回true，否则返回false。
+实例（ 24.test.html ）：
+
+<script type="text/javascript">
+//判断是否是数字
+var str = '374829348791';
+var re = /\D/;      //  \D代表非数字
+if( re.test(str) ){   // 返回true,代表在字符串中找到了非数字。
+    alert('不全是数字');
+}else{
+    alert('全是数字');
+}
+</script>
+
+
+
+search()方法：
+在字符串搜索符合正则的内容，搜索到就返回出现的位置（从0开始，如果匹配的不只是一个字母，那只会返回第一个字母的位置）， 如果搜索失败就返回 -1
+实例（ 25.search.html ）：
+
+<script type="text/javascript">
+var str = 'abcdef';
+var re = /B/i;
+//var re = new RegExp('B','i'); 也可以这样写
+alert( str.search(re) ); // 1
+</script>
+
+
+
+match ()方法：
+获取正则匹配到的结果，以数组的形式返回
+实例（ 26.match.html ）：
+
+<script type="text/javascript">
+"186a619b28".match(/\d+/g); // ["186","619","28"] 
+</script>
+
+
+
+replace()方法：
+replace 本身是JavaScript字符串对象的一个方法，它允许接收两个参数：replace([RegExp|String],[String|Function])
+第1个参数可以是一个普通的字符串或是一个正则表达式.第2个参数可以是一个普通的字符串或是一个回调函数.
+实例（ 27.replace.html ）：
+
+<script type="text/javascript">
+var phone = "13112345678";
+var sliceNumber = 1234;
+var newPhone = phone.replace(new RegExp(sliceNumber,'g'),'****');
+console.log(newPhone); //131****5678
+</script>
+
+
+
+### 正则表达式的特殊字母和符号
+
+特殊字母 ：
+	\  : 转义符，把用于特殊作用的字母的功能显示出来				
+	\d : 任意数字
+	\D : 非数字
+	\w : 数字，字母，下划线
+	\W : !(数字，字母，下划线)
+	\s : 空格
+	\S : 非空格
+	\n:换行
+					
+特殊符号：
+	\  :  转义符
+	F:\web2017\work\2019-11-22
+
+​	2 ~/Desktop
+
+​	+: 量词，代表数量,至少一个
+​	?  : 量词, 最多一个
+
+​	*： 量词，代表数量,至少一个
+​	.  : 任意字符
+​	^  : 从开头开始查找
+​	$  : 以什么结束
+​	[] : 选择任意一个
+​	[^] : 非[]里面的任意字符
+​	{}  : 
+​		{3} : 几位数
+​		{3,6}: 几位到几位
+​		{3,} :  至少几位
